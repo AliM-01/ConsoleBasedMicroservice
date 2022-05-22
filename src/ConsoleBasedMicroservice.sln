@@ -3,9 +3,28 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{0A9DE935-8ADA-49B2-9EB1-F658C257366E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{5B7CEB34-E0DC-486A-9360-9B6DCF5C3236}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.RabbitMQ", "BuildingBlocks\EventBus.RabbitMQ\EventBus.RabbitMQ.csproj", "{2AF76535-6F8A-490A-B08C-2338951CD8EA}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2AF76535-6F8A-490A-B08C-2338951CD8EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AF76535-6F8A-490A-B08C-2338951CD8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AF76535-6F8A-490A-B08C-2338951CD8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AF76535-6F8A-490A-B08C-2338951CD8EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2AF76535-6F8A-490A-B08C-2338951CD8EA} = {0A9DE935-8ADA-49B2-9EB1-F658C257366E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {909393F5-9B3C-456A-BAFA-5A1BAD9500BE}
