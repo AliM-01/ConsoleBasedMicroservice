@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Listener", "Listener", "{F5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Services\Client\Client\Client.csproj", "{86A46DAE-2FE4-46E2-AD34-66B597F8FDC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Listener", "Services\Listener\Listener\Listener.csproj", "{33E2DFD3-EE54-46CF-AB6D-CBF8CBC7E5A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{86A46DAE-2FE4-46E2-AD34-66B597F8FDC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86A46DAE-2FE4-46E2-AD34-66B597F8FDC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86A46DAE-2FE4-46E2-AD34-66B597F8FDC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33E2DFD3-EE54-46CF-AB6D-CBF8CBC7E5A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33E2DFD3-EE54-46CF-AB6D-CBF8CBC7E5A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33E2DFD3-EE54-46CF-AB6D-CBF8CBC7E5A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33E2DFD3-EE54-46CF-AB6D-CBF8CBC7E5A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +44,7 @@ Global
 		{0F05313E-85E8-492B-A4C8-1E06C00A8830} = {5B7CEB34-E0DC-486A-9360-9B6DCF5C3236}
 		{F5DDE06C-7FE0-4248-B6BC-A420D7DCC10E} = {5B7CEB34-E0DC-486A-9360-9B6DCF5C3236}
 		{86A46DAE-2FE4-46E2-AD34-66B597F8FDC0} = {0F05313E-85E8-492B-A4C8-1E06C00A8830}
+		{33E2DFD3-EE54-46CF-AB6D-CBF8CBC7E5A4} = {F5DDE06C-7FE0-4248-B6BC-A420D7DCC10E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {909393F5-9B3C-456A-BAFA-5A1BAD9500BE}
