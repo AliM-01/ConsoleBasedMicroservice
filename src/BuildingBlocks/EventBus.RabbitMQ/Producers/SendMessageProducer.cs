@@ -1,7 +1,13 @@
 ﻿using EventBus.RabbitMQ.Events;
 
 namespace EventBus.RabbitMQ.Producers;
-public class SendMessageProducer
+
+public interface ISendMessageProducer
+{
+    Task PublishSendMessage(string queueName, SendMessageEvent publishModel);
+}
+
+public class SendMessageProducer : ISendMessageProducer
 {
     private readonly IRabbitMQConnection _connection;
 
