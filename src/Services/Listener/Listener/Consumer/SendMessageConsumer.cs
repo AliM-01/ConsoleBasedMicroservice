@@ -18,9 +18,9 @@ public class SendMessageConsumer
 
     public async Task Consume()
     {
-        using (IConnection connection = _factory.CreateConnection())
+        using (var connection = _factory.CreateConnection())
         {
-            using (IModel channel = connection.CreateModel())
+            using (var channel = connection.CreateModel())
             {
                 channel.QueueDeclare(queue: EventBusConstants.SendMessageQueue,
                                      durable: false,
