@@ -12,7 +12,7 @@ Console.WriteLine("-------------------\n Listener service is up ! \n------------
 
 var consumer = new SendMessageConsumer(GetConnectionFactory(config));
 
-await Task.Run(() => Console.ReadKey());
+await Task.Run(() => Console.Read());
 
 static ConnectionFactory GetConnectionFactory(IConfigurationRoot? config)
 {

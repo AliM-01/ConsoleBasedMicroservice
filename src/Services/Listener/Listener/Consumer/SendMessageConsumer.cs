@@ -32,7 +32,7 @@ public class SendMessageConsumer
                 var result = channel.BasicGet(EventBusConstants.SendMessageQueue, true);
                 if (result != null)
                 {
-                    string message = Encoding.UTF8.GetString(e.Body.Span);
+                    string message = Encoding.UTF8.GetString(result.Body.Span);
                     var sendMessageEvent = JsonSerializer.Deserialize<SendMessageEvent>(message);
 
                     await Console.Out.WriteLineAsync($"{sendMessageEvent?.Message} was sent to {sendMessageEvent?.Email}");
