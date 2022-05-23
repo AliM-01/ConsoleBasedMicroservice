@@ -10,22 +10,14 @@ var config = builder.Build();
 
 Console.WriteLine("-------------------\n Listener service is up ! \n-------------------\n Press any key to exit...\n\n");
 
-var consumer = new SendMessageConsumer(GetConnectionFactory(config));
+var consumer = new SendMessageConsumer(new ConnectionFactory()
+    {
+        HostName = config?["EventBus:HostName"],
+        UserName = config?["EventBus:UserName"],
+        Password = config?["EventBus:Password"]
+    });
 
-await Task.Run(() => Console.Read());
-
-static ConnectionFactory GetConnectionFactory(IConfigurationRoot? config)
+while (true) 
 {
-    var factory = new ConnectionFactory()
-    {
-        HostName = config?["EventBus:HostName"]
-    };
-
-    if (!string.IsNullOrEmpty(config?["EventBus:UserName"]))
-    {
-        factory.UserName = config?["EventBus:UserName"];
-        factory.Password = config?["EventBus:Password"];
-    }
-
-    return factory;
-}
+      System.Console.ReadLine();                
+};
