@@ -1,43 +1,20 @@
-﻿using System.Text;
-using System.Text.Json;
-using EventBus.RabbitMQ.Constants;
+﻿using EventBus.RabbitMQ.Constants;
 using EventBus.RabbitMQ.Events;
-using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
 namespace Listener.Consumer;
 
-public class SendMessageConsumer
+public static class SendMessageConsumer
 {
-    private readonly ConnectionFactory _factory;
-
-    public SendMessageConsumer(ConnectionFactory factory)
+    public static async Task HandleReceived(object model, BasicDeliverEventArgs ea)
     {
-        _factory = factory;
-    }
-
-    public async Task Consume()
-    {
-        using (var connection = _factory.CreateConnection())
+        if (ea.RoutingKey.Equals(EventBusConstants.SendMessageQueue))
         {
-            using (var channel = connection.CreateModel())
-            {
-                channel.QueueDeclare(queue: EventBusConstants.SendMessageQueue,
-                                     durable: false,
-                                     exclusive: false,
-                                     autoDelete: false,
-                                     arguments: null);
+            string message = System.Text.Encoding.UTF8.GetString(ea.Body.ToArray());
 
-                var consumer = new EventingBasicConsumer(channel);
-                var result = channel.BasicGet(EventBusConstants.SendMessageQueue, true);
-                if (result != null)
-                {
-                    string message = Encoding.UTF8.GetString(result.Body.Span);
-                    var sendMessageEvent = JsonSerializer.Deserialize<SendMessageEvent>(message);
+            var sendMessageEvent = System.Text.Json.JsonSerializer.Deserialize<SendMessageEvent>(message);
 
-                    await Console.Out.WriteLineAsync($"{sendMessageEvent?.Message} was sent to {sendMessageEvent?.Email}");
-                }
-            }
+            await Console.Out.WriteLineAsync($"{sendMessageEvent?.Message} was sent to {sendMessageEvent?.Email}");
         }
     }
 }
