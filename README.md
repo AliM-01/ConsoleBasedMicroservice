@@ -1,5 +1,5 @@
 # ConsoleBasedMicroservice
-A simple rabbitmq client-listener implementation using .NET 6, MassTransit and a RabbitMQ Docker image.
+A simple Microservice that implements messaging(sender, receiver) with .NET 6 & RabbitMQ
 
 
 ## Requirements
@@ -19,9 +19,9 @@ cd ConsoleBasedMicroservice/src/
 docker-compose -f docker-compose.yml up -d
 ```
 
-To test it open a browser and navigate to `http://localhost:7000/swagger/index.html` and access swagger :
+To try it open a browser and navigate to `http://localhost:7000/swagger/index.html` and access swagger :
 
-You can send messages from browser; to view recieved messages 
+You can send messages from the browser; to view received messages 
 
 * Open Docker Desktop
 * Open `cbm_client` container
