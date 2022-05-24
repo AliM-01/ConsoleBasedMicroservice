@@ -17,7 +17,7 @@ services:
       dockerfile: Services/Client/Client/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - "ConnectionStrings:EventBus=amqp://guest:guest@cbm_rabbit_mq"
+      - "ConnectionStrings:EventBus=amqp://guest:guest@cbm_rabbit_mq:5672"
     ports:
       - "7000:80"
     volumes:
@@ -33,7 +33,7 @@ services:
       context: .
       dockerfile: Services/Listener/Listener/Dockerfile
     environment:
-      - "ConnectionStrings:EventBus=amqp://guest:guest@cbm_rabbit_mq"
+      - "ConnectionStrings:EventBus=amqp://guest:guest@cbm_rabbit_mq:5672"
     restart: on-failure
     depends_on:
       - cbm_rabbit_mq

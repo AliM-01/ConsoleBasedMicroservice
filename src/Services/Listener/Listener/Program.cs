@@ -23,4 +23,7 @@ var bus = Bus.Factory.CreateUsingRabbitMq(busConfig =>
 
 await bus.StartAsync();
 
-Console.ReadLine();
+while (true)
+{
+    Console.ReadLine();
+}
