@@ -1,26 +1,14 @@
-using EventBus.RabbitMQ;
-using EventBus.RabbitMQ.Producers;
-using RabbitMQ.Client;
+using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<IRabbitMQConnection>(sp =>
+builder.Services.AddMassTransit(config =>
 {
-    var factory = new ConnectionFactory()
+    config.UsingRabbitMq((ctx, cfg) =>
     {
-        HostName = builder.Configuration["EventBus:HostName"]
-    };
-
-    if (!string.IsNullOrEmpty(builder.Configuration["EventBus:UserName"]))
-    {
-        factory.UserName = builder.Configuration["EventBus:UserName"];
-        factory.Password = builder.Configuration["EventBus:Password"];
-    }
-
-    return new RabbitMQConnection(factory);
+        cfg.Host(builder.Configuration.GetConnectionString("EventBus"));
+    });
 });
-
-builder.Services.AddSingleton<ISendMessageProducer, SendMessageProducer>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

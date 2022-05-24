@@ -1,5 +1,5 @@
-﻿using EventBus.RabbitMQ.Constants;
-using EventBus.RabbitMQ.Producers;
+﻿using EventBus.RabbitMQ.Events;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Client.Controllers;
@@ -7,19 +7,19 @@ namespace Client.Controllers;
 [ApiController]
 public class MessageController : ControllerBase
 {
-    private readonly ISendMessageProducer _producer;
+    private readonly IPublishEndpoint _publisher;
 
-    public MessageController(ISendMessageProducer producer)
+    public MessageController(IPublishEndpoint publisher)
     {
-        _producer = producer;
+        _publisher = publisher;
     }
 
     [HttpPost]
-    public IActionResult SendMessage([FromQuery] string msg, [FromQuery] string email)
+    public async Task<IActionResult> SendMessage([FromQuery] string msg, [FromQuery] string email)
     {
-        var publishModel = new EventBus.RabbitMQ.Events.SendMessageEvent(msg, email);
+        var publishModel = new SendMessageEvent(msg, email);
 
-        _producer.PublishSendMessage(EventBusConstants.SendMessageQueue, publishModel);
+        await _publisher.Publish<SendMessageEvent>(publishModel);
 
         return Ok();
     }
