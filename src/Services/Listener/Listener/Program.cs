@@ -1,6 +1,7 @@
-﻿using Listener.Consumer;
+﻿using EventBus.RabbitMQ.Constants;
 using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
 var builder = new ConfigurationBuilder()
                 .AddJsonFile($"appsettings.json", true, true)
@@ -10,22 +11,30 @@ var config = builder.Build();
 
 Console.WriteLine("-------------------\n Listener service is up ! \n-------------------\n Press any key to exit...\n\n");
 
-var consumer = new SendMessageConsumer(GetConnectionFactory(config));
-
-await Task.Run(() => Console.ReadKey());
-
-static ConnectionFactory GetConnectionFactory(IConfigurationRoot? config)
+var factory = new ConnectionFactory()
 {
-    var factory = new ConnectionFactory()
-    {
-        HostName = config?["EventBus:HostName"]
-    };
+    HostName = config["EventBus:HostName"],
+    UserName = config["EventBus:UserName"],
+    Password = config["EventBus:Password"],
+    DispatchConsumersAsync = true
+};
 
-    if (!string.IsNullOrEmpty(config?["EventBus:UserName"]))
-    {
-        factory.UserName = config?["EventBus:UserName"];
-        factory.Password = config?["EventBus:Password"];
-    }
+using var connection = factory.CreateConnection();
 
-    return factory;
-}
+using var channel = connection.CreateModel();
+
+channel.QueueDeclare(queue: EventBusConstants.SendMessageQueue,
+                     durable: false,
+                     exclusive: false,
+                     autoDelete: false,
+                     arguments: null);
+
+var consumer = new AsyncEventingBasicConsumer(channel);
+
+consumer.Received += Listener.Consumer.SendMessageConsumer.HandleReceived;
+
+channel.BasicConsume(queue: EventBusConstants.SendMessageQueue,
+                     autoAck: true,
+                     consumer: consumer);
+
+System.Console.ReadLine();

@@ -1,0 +1,39 @@
+version: '3.4'
+
+services:
+
+  cbm_rabbit_mq:
+    container_name: cbm_rabbit_mq
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  cbm_client:
+    container_name: cbm_client
+    image: ${DOCKER_REGISTRY-}cbm_client
+    build:
+      context: .
+      dockerfile: Services/Client/Client/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - "EventBus:HostName=cbm_rabbit_mq"
+    ports:
+      - "7000:80"
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    restart: on-failure
+    depends_on:
+      - cbm_rabbit_mq
+
+  cbm_listener:
+    container_name: cbm_listener
+    image: ${DOCKER_REGISTRY-}cbm_listener
+    build:
+      context: .
+      dockerfile: Services/Listener/Listener/Dockerfile
+    environment:
+      - "EventBus:HostName=cbm_rabbit_mq"
+    restart: on-failure
+    depends_on:
+      - cbm_rabbit_mq

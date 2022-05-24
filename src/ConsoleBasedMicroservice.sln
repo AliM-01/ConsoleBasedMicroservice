@@ -7,15 +7,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{5B7CEB34-E0DC-486A-9360-9B6DCF5C3236}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.RabbitMQ", "BuildingBlocks\EventBus.RabbitMQ\EventBus.RabbitMQ.csproj", "{2AF76535-6F8A-490A-B08C-2338951CD8EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.RabbitMQ", "BuildingBlocks\EventBus.RabbitMQ\EventBus.RabbitMQ.csproj", "{2AF76535-6F8A-490A-B08C-2338951CD8EA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{0F05313E-85E8-492B-A4C8-1E06C00A8830}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Listener", "Listener", "{F5DDE06C-7FE0-4248-B6BC-A420D7DCC10E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Services\Client\Client\Client.csproj", "{86A46DAE-2FE4-46E2-AD34-66B597F8FDC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Services\Client\Client\Client.csproj", "{86A46DAE-2FE4-46E2-AD34-66B597F8FDC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Listener", "Services\Listener\Listener\Listener.csproj", "{33E2DFD3-EE54-46CF-AB6D-CBF8CBC7E5A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Listener", "Services\Listener\Listener\Listener.csproj", "{33E2DFD3-EE54-46CF-AB6D-CBF8CBC7E5A4}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{446E9501-87F4-42BA-A128-CBE1CD439D62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{33E2DFD3-EE54-46CF-AB6D-CBF8CBC7E5A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33E2DFD3-EE54-46CF-AB6D-CBF8CBC7E5A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33E2DFD3-EE54-46CF-AB6D-CBF8CBC7E5A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{446E9501-87F4-42BA-A128-CBE1CD439D62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{446E9501-87F4-42BA-A128-CBE1CD439D62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{446E9501-87F4-42BA-A128-CBE1CD439D62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{446E9501-87F4-42BA-A128-CBE1CD439D62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

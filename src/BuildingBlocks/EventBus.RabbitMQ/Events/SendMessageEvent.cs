@@ -1,6 +1,10 @@
 ﻿namespace EventBus.RabbitMQ.Events;
 public class SendMessageEvent
 {
+    public SendMessageEvent()
+    {
+    }
+
     public SendMessageEvent(string msg, string email)
     {
         Message = msg;

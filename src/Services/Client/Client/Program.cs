@@ -1,7 +1,5 @@
 using EventBus.RabbitMQ;
-using EventBus.RabbitMQ.Constants;
 using EventBus.RabbitMQ.Producers;
-using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +22,7 @@ builder.Services.AddSingleton<IRabbitMQConnection>(sp =>
 
 builder.Services.AddSingleton<ISendMessageProducer, SendMessageProducer>();
 
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -33,15 +32,6 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
-
-app.MapPost("/send", ([FromQuery] string msg, [FromQuery] string email, [FromServices] ISendMessageProducer producer) =>
-{
-    var publishModel = new EventBus.RabbitMQ.Events.SendMessageEvent(msg, email);
-
-    producer.PublishSendMessage(EventBusConstants.SendMessageQueue, publishModel);
-
-    return Results.Ok;
-})
-.WithName("SendMsg");
+app.MapControllers();
 
 app.Run();

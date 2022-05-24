@@ -2,7 +2,7 @@
 using RabbitMQ.Client.Exceptions;
 
 namespace EventBus.RabbitMQ;
-public interface IRabbitMQConnection : IDisposable
+public interface IRabbitMQConnection
 {
     bool IsConnected { get; }
 
@@ -17,7 +17,6 @@ public class RabbitMQConnection : IRabbitMQConnection
 
     private readonly IConnectionFactory _connectionFactory;
     private IConnection _connection;
-    private bool _disposed;
 
     public RabbitMQConnection(IConnectionFactory connectionFactory)
     {
@@ -35,7 +34,7 @@ public class RabbitMQConnection : IRabbitMQConnection
     {
         get
         {
-            return _connection is not null && _connection.IsOpen && !_disposed;
+            return _connection is not null && _connection.IsOpen;
         }
     }
 
@@ -67,21 +66,6 @@ public class RabbitMQConnection : IRabbitMQConnection
         }
 
         return _connection.CreateModel();
-    }
-
-    public void Dispose()
-    {
-        if (_disposed)
-            return;
-
-        try
-        {
-            _connection.Dispose();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
     }
 
 }
