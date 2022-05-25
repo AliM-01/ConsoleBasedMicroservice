@@ -5,7 +5,7 @@ A simple Microservice that implements messaging(sender, receiver) with .NET 6 & 
 ## Requirements
 * Docker Desktop (Windows or Mac) or Docker Engine (Linux)
 * Dotnet SDK 6 installed
-* dotnet CLI / Visual Studio 2019/2022
+* dotnet CLI
 
 ## Installation & Running
 To install clone [this repository](https://github.com/AliM-01/ConsoleBasedMicroservice):
